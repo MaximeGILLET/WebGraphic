@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trigo</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js"></script>
+<script src="https://dl.dropboxusercontent.com/u/3587259/Code/Threejs/OrbitControls.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="trigo.js"></script>
+</head>
+
+<body>
+	<div id="container">
+
+	</div>
+	<div class="GUI">
+		<form id="EditorForm" class="col-md-3" >
+		   <span class="label label-default" >Vector 1 :</span>
+		   <div class="input-group col-md-3">				
+				<span class="input-group-addon" id="basic-addon1">X:</span>
+				<input class="form-control" id="x1" type="number" min="-100" max="100" step="1" name="vector1"/>
+			</div>
+			 <div class="input-group col-md-3">				
+				<span class="input-group-addon" id="basic-addon1">Y:</span>
+				<input class="form-control" id="y1" type="number" min="-100" max="100" step="1" name="vector1"/>
+			</div>
+			 <div class="input-group col-md-3">				
+				<span class="input-group-addon" id="basic-addon1">Z:</span>
+				<input class="form-control" id="z1" type="number" min="-100" max="100" step="1" name="vector1"/>
+			</div>
+			<div class="btn btn-default" onClick="updateVectors()">Draw!</div>
+			<div class="btn btn-default" onClick="cleanVectors()">Clear.</div>
+		</form>
+		
+	</div>
+</body>
+
+</html>
+
+<style>
+
+.GUI{
+	background-color:rgba(0, 0, 0, 0);
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index = 1000;
+	
+}
+
+#EditorForm{
+	background-color:rgba(0, 0, 0, 0);
+	
+}
+
+#container{
+z-index = -1;
+}
+</style>

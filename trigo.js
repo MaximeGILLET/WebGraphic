@@ -1,0 +1,151 @@
+var camera, controls, scene, renderer;
+var addedByUser;
+var vector1,vector2;
+
+
+$( document ).ready(function() {
+    console.log( "ready!" );
+	init();
+    animate();
+});
+
+
+
+function updateVectors(){
+	
+	var object = $("#EditorForm").serializeArray();
+	
+	var vectorArray = parseVectors(object);
+	vectorArray.forEach(updateVector);
+	render();
+}
+
+function parseVectors(object){
+ 
+	var vectorArray = [];
+	var vectorElement;
+	for (i = 0; i < object.length-2; i=i+3) { 
+		vectorElement = {x:parseInt(object[i].value),y:parseInt(object[i+1].value),z:parseInt(object[i+2].value)}
+		vectorArray.push(vectorElement);
+	}
+	
+	return vectorArray;
+
+}
+
+function updateVector(element, index, array){
+	
+	var geometry = new THREE.Geometry();
+    geometry.vertices.push(new THREE.Vector3(element.x, element.y, element.z));
+    geometry.vertices.push(new THREE.Vector3(0,0,0));
+ 
+    var line = new THREE.Line(geometry, new THREE.LineBasicMaterial({
+        color: 0xffffff,
+		fog:true
+    }));
+	addedByUser.add(line);
+}
+
+
+function cleanVectors(){
+	scene.remove(addedByUser);
+	addedByUser= new THREE.Object3D();
+	scene.add(addedByUser);
+	render();
+}
+
+function onWindowResize() {
+
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize( window.innerWidth, window.innerHeight );
+
+  render();
+
+
+}
+
+
+function init(){
+
+	/* setting camera */
+    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
+    camera.position.set(20, 20,20);
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+	
+	/* Setting base vectors */
+	var materialX = new THREE.LineBasicMaterial({
+        color: 0xff0000,
+		fog:true
+    });
+	var materialY = new THREE.LineBasicMaterial({
+        color: 0x00ff00,
+		fog:true
+    });
+	var materialZ = new THREE.LineBasicMaterial({
+        color: 0x0000ff,
+		fog:true
+    });
+	
+	var geometryX = new THREE.Geometry();
+    geometryX.vertices.push(new THREE.Vector3(1, 0, 0));
+    geometryX.vertices.push(new THREE.Vector3(0,0, 0)); 
+    var lineX = new THREE.Line(geometryX, materialX);
+
+
+    var geometryY = new THREE.Geometry();
+    geometryY.vertices.push(new THREE.Vector3(0, 1, 0));
+    geometryY.vertices.push(new THREE.Vector3(0,0, 0)); 
+    var lineY = new THREE.Line(geometryY, materialY);
+    
+    var geometryZ = new THREE.Geometry();
+    geometryZ.vertices.push(new THREE.Vector3(0, 0, 0));
+    geometryZ.vertices.push(new THREE.Vector3(0,0, 1)); 
+    var lineZ = new THREE.Line(geometryZ, materialZ);     
+	  
+	/* Setting Grid object */
+	var size = 100;
+	var step = 1;
+	var gridHelper = new THREE.GridHelper( size, step );	
+	
+	/* user objects holder */
+	addedByUser= new THREE.Object3D();
+	
+	/* setting scene and objects */
+	scene = new THREE.Scene();
+	scene.fog = new THREE.FogExp2( 0x000000, 0.02  );
+	scene.add(lineX);
+	scene.add(lineY);
+	scene.add(lineZ);  
+	scene.add(addedByUser);	
+	scene.add( gridHelper );
+    
+
+	
+	/* Setting renderer */	
+	renderer = new THREE.WebGLRenderer();
+	renderer.setSize(window.innerWidth, window.innerHeight);	
+    $("#container").html(renderer.domElement);
+	renderer.setClearColor( scene.fog.color, 1 );
+	
+	/* Setting orbit camera control */
+	controls = new THREE.OrbitControls( camera,renderer.domElement );
+	controls.addEventListener( 'change', render );
+	
+	
+	renderer.render(scene, camera);
+}
+
+function animate() {
+
+  requestAnimationFrame( animate );
+  controls.update();
+
+}
+
+function render() {
+  renderer.render( scene, camera );
+}
+

@@ -9,7 +9,33 @@ $( document ).ready(function() {
     animate();
 });
 
+function resetCamera(){
+	camera.position.set(20, 20,20);
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+	render();
+	
+}
 
+function faceX(){
+	camera.position.set(20, 0,0);
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+	render();
+	
+}
+
+function faceY(){
+	camera.position.set(0, 20,0);
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+	render();
+	
+}
+
+function faceZ(){
+	camera.position.set(0, 0,20);
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+	render();
+	
+}
 
 function updateVectors(){
 	
@@ -104,6 +130,8 @@ function init(){
     geometryZ.vertices.push(new THREE.Vector3(0, 0, 0));
     geometryZ.vertices.push(new THREE.Vector3(0,0, 1)); 
     var lineZ = new THREE.Line(geometryZ, materialZ);     
+	
+
 	  
 	/* Setting Grid object */
 	var size = 100;
@@ -114,28 +142,30 @@ function init(){
 	addedByUser= new THREE.Object3D();
 	
 	/* setting scene and objects */
-	scene = new THREE.Scene();
-	scene.fog = new THREE.FogExp2( 0x000000, 0.02  );
-	scene.add(lineX);
-	scene.add(lineY);
-	scene.add(lineZ);  
-	scene.add(addedByUser);	
-	scene.add( gridHelper );
-    
+	sceneAxes = new THREE.Scene();	
+	sceneAxes.add(lineX);
+	sceneAxes.add(lineY);
+	sceneAxes.add(lineZ);  
+	sceneAxes.add(addedByUser);	
+	
+    sceneGrid = new THREE.Scene();	
+	sceneGrid.fog = new THREE.FogExp2( 0x000000, 0.02  );
+	sceneGrid.add( gridHelper );
 
 	
 	/* Setting renderer */	
 	renderer = new THREE.WebGLRenderer();
 	renderer.setSize(window.innerWidth, window.innerHeight);	
     $("#container").html(renderer.domElement);
-	renderer.setClearColor( scene.fog.color, 1 );
+	renderer.setClearColor( sceneGrid.fog.color, 1 );
 	
 	/* Setting orbit camera control */
 	controls = new THREE.OrbitControls( camera,renderer.domElement );
 	controls.addEventListener( 'change', render );
 	
-	
-	renderer.render(scene, camera);
+	renderer.autoClear = false;
+	renderer.render(sceneGrid, camera);
+	renderer.render(sceneAxes, camera);
 }
 
 function animate() {
@@ -146,6 +176,9 @@ function animate() {
 }
 
 function render() {
-  renderer.render( scene, camera );
+	renderer.clear();                    
+    renderer.render( sceneGrid, camera );     
+    renderer.clearDepth();
+    renderer.render( sceneAxes, camera );
 }
 

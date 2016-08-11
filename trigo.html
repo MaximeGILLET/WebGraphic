@@ -33,6 +33,14 @@
 			<div class="btn btn-default" onClick="updateVectors()">Draw!</div>
 			<div class="btn btn-default" onClick="cleanVectors()">Clear.</div>
 		</form>
+		<div class="col-md-3">
+			<span class="label label-default" >Camera control :</span>
+			<div class="btn btn-default" onClick="resetCamera()">Reset</div>
+			<div class="btn btn-default" onClick="faceX()">X</div>
+			<div class="btn btn-default" onClick="faceY()">Y</div>
+			<div class="btn btn-default" onClick="faceZ()">Z</div>
+		
+		</div>
 		
 	</div>
 </body>
@@ -40,6 +48,7 @@
 </html>
 
 <style>
+body {overflow: hidden; }
 
 .GUI{
 	background-color:rgba(0, 0, 0, 0);

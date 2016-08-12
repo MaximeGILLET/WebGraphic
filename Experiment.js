@@ -94,6 +94,8 @@ function stepWrap(){
 }
 var deg_to_rad = Math.PI / 180.0;
 var depth3D = 10;
+var dteta1 , dteta2;
+var sink;
 
 function initTreeVector(){
 
@@ -109,8 +111,8 @@ function drawTreeVector(vector,teta,phi,depth3D){
 		newVector.y = vector.y+(vector.length()*depth3D/10)*Math.sin(phi * deg_to_rad);
 		
 		drawThreeVector(newVector, vector);
-		drawTreeVector(newVector, teta +20,phi-20, depth3D - 1);
-		drawTreeVector(newVector, teta +180,phi-20, depth3D - 1);
+		drawTreeVector(newVector, teta +65,phi-20, depth3D - 1);
+		drawTreeVector(newVector, teta -65,phi-20, depth3D - 1);
 
 	}
 	

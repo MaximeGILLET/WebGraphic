@@ -17,21 +17,21 @@ function resetCamera(){
 }
 
 function faceX(){
-	camera.position.set(10, 0,0);
+	camera.position.set(100, 0,0);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 	render();
 	
 }
 
 function faceY(){
-	camera.position.set(0, 10,0);
+	camera.position.set(0,100,0);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 	render();
 	
 }
 
 function faceZ(){
-	camera.position.set(0, 0,10);
+	camera.position.set(0, 0,100);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 	render();
 	

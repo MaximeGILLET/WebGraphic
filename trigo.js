@@ -7,6 +7,7 @@ $( document ).ready(function() {
     console.log( "ready!" );
 	init();
     animate();
+	$('.collapse').collapse();
 });
 
 function resetCamera(){

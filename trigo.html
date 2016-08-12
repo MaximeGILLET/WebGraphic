@@ -17,60 +17,65 @@
 
 	</div>
 	<div class="GUI">
-		<div class="col-md-1 panel panel-default" style="text-align: center;">
-		   <span class="label label-default" >Vector 1 :</span>
-		   <form id="vector">
-			   <div class="input-group">				
-					<span class="input-group-addon" id="basic-addon1">X:</span>
-					<input class="form-control" id="x1" type="number" min="-100" max="100" step="1" name="vector1"/>
+		<button  class="btn btn-default hud-collapse" type="button" data-toggle="collapse" data-target="#menu"  aria-expanded="false" aria-controls="menu">
+		  HUD
+		</button >
+		<div class="collapse" id="menu">
+			<div class="col-md-1 panel panel-default" style="text-align: center;">
+			   <span class="label label-default" >Vector 1 :</span>
+			   <form id="vector">
+				   <div class="input-group">				
+						<span class="input-group-addon" id="basic-addon1">X:</span>
+						<input class="form-control" id="x1" type="number" min="-100" max="100" step="1" name="vector1"/>
+					</div>
+					 <div class="input-group">				
+						<span class="input-group-addon" id="basic-addon1">Y:</span>
+						<input class="form-control" id="y1" type="number" min="-100" max="100" step="1" name="vector1"/>
+					</div>
+					 <div class="input-group">				
+						<span class="input-group-addon" id="basic-addon1">Z:</span>
+						<input class="form-control" id="z1" type="number" min="-100" max="100" step="1" name="vector1"/>
+					</div>
+				</form>	
+				<div class="btn btn-default vec" onClick="updateVectors()" >Draw!</div>
+				<div class="btn btn-default vec" onClick="cleanVectors()">Clear.</div>
+				<span class="label" >functions :</span>
+				<div>				
+					<div class="btn btn-default vec" onClick="vectorSerieLiebnizStepDraw()">Liebniz (step)</div>	
+					<div class="btn btn-default vec" onClick="vectorSerieLiebnizAutoDraw()">Liebniz (auto)</div>	
+					<div class="input-group">				
+						<span class="input-group-addon" id="basic-addon1">N = </span>
+						<input class="form-control" id="maxRank" type="number" min="1" max="10000" step="1" name="maxRank"/>
+					</div>							
+				</div>	
+				<span class="label" >Extras :</span>
+				<div>
+					<div class="btn btn-default vec" onClick="initTree()">Draw Tree 2D</div>
+					<div class="input-group">				
+						<span class="input-group-addon" id="basic-addon1">teta1 = </span>
+						<input class="form-control" id="teta1" type="number" min="-180" max="180" step="1" name="teta1"/>
+					</div>
+					<div class="input-group">				
+						<span class="input-group-addon" id="basic-addon1">teta2 = </span>
+						<input class="form-control" id="teta2" type="number" min="-180" max="180" step="1" name="teta2"/>
+					</div>
+					<div class="input-group">				
+						<span class="input-group-addon" id="basic-addon1">sink = </span>
+						<input class="form-control" id="sink" type="number" min="-90" max="90" step="1" name="sink"/>
+					</div>				
+					<div class="btn btn-default vec" onClick="initTreeVector()">Draw Tree 3D</div>	
 				</div>
-				 <div class="input-group">				
-					<span class="input-group-addon" id="basic-addon1">Y:</span>
-					<input class="form-control" id="y1" type="number" min="-100" max="100" step="1" name="vector1"/>
-				</div>
-				 <div class="input-group">				
-					<span class="input-group-addon" id="basic-addon1">Z:</span>
-					<input class="form-control" id="z1" type="number" min="-100" max="100" step="1" name="vector1"/>
-				</div>
-			</form>	
-			<div class="btn btn-default vec" onClick="updateVectors()" >Draw!</div>
-			<div class="btn btn-default vec" onClick="cleanVectors()">Clear.</div>
-			<span class="label" >functions :</span>
-			<div>				
-				<div class="btn btn-default vec" onClick="vectorSerieLiebnizStepDraw()">Liebniz (step)</div>	
-				<div class="btn btn-default vec" onClick="vectorSerieLiebnizAutoDraw()">Liebniz (auto)</div>	
-				<div class="input-group">				
-					<span class="input-group-addon" id="basic-addon1">N = </span>
-					<input class="form-control" id="maxRank" type="number" min="1" max="10000" step="1" name="maxRank"/>
-				</div>							
-			</div>	
-			<span class="label" >Extras :</span>
-			<div>
-				<div class="btn btn-default vec" onClick="initTree()">Draw Tree 2D</div>
-				<div class="input-group">				
-					<span class="input-group-addon" id="basic-addon1">teta1 = </span>
-					<input class="form-control" id="teta1" type="number" min="-180" max="180" step="1" name="teta1"/>
-				</div>
-				<div class="input-group">				
-					<span class="input-group-addon" id="basic-addon1">teta2 = </span>
-					<input class="form-control" id="teta2" type="number" min="-180" max="180" step="1" name="teta2"/>
-				</div>
-				<div class="input-group">				
-					<span class="input-group-addon" id="basic-addon1">sink = </span>
-					<input class="form-control" id="sink" type="number" min="-90" max="90" step="1" name="sink"/>
+			</div>
+			<div class="col-md-2" style="text-align: center;">
+				<span class="label label-default" >Camera control :</span>
+				<div>
+					<div class="btn btn-default" onClick="resetCamera()">Reset</div>
+					<div class="btn btn-default" onClick="faceX()">X</div>
+					<div class="btn btn-default" onClick="faceY()">Y</div>
+					<div class="btn btn-default" onClick="faceZ()">Z</div>
 				</div>				
-				<div class="btn btn-default vec" onClick="initTreeVector()">Draw Tree 3D</div>	
 			</div>
 		</div>
-		<div class="col-md-2" style="text-align: center;">
-			<span class="label label-default" >Camera control :</span>
-			<div>
-				<div class="btn btn-default" onClick="resetCamera()">Reset</div>
-				<div class="btn btn-default" onClick="faceX()">X</div>
-				<div class="btn btn-default" onClick="faceY()">Y</div>
-				<div class="btn btn-default" onClick="faceZ()">Z</div>
-			</div>				
-		</div>		
 	</div>
 </body>
 
@@ -78,6 +83,7 @@
 
 <style>
 body {overflow: hidden; background-color:rgba(128, 128, 128, 1);}
+
 
 .GUI{
 	background-color:rgba(0, 0, 0, 0);

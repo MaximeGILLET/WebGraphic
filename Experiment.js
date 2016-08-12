@@ -115,7 +115,6 @@ function drawTreeVector(vector,teta,phi,depth3D){
 		drawTreeVector(newVector, teta -65,phi-20, depth3D - 1);
 
 	}
-	
 
 }
 

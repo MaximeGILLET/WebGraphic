@@ -39,9 +39,10 @@ function faceZ(){
 
 function updateVectors(){
 	
-	var object = $("#EditorForm").serializeArray();
+	var object = $("#vector").serializeArray();
 	
 	var vectorArray = parseVectors(object);
+
 	vectorArray.forEach(drawVector);
 	render();
 }
@@ -61,7 +62,7 @@ function parseVectors(object){
 
 function drawVector(element, index, array){
 	
-	var geometry = new THREE.Geometry();
+	var geometry = new THREE.Geometry();	
     geometry.vertices.push(new THREE.Vector3(element.x, element.y, element.z));
     geometry.vertices.push(new THREE.Vector3(0,0,0));
  
@@ -70,9 +71,11 @@ function drawVector(element, index, array){
 		fog:true
     }));
 	addedByUser.add(line);
+	
+	
 }
 
-function drawVector(newVector,origin = new THREE.Vector3(0,0,0)){
+function drawThreeVector(newVector,origin = new THREE.Vector3(0,0,0),callback){
 	
 	var geometry = new THREE.Geometry();
     geometry.vertices.push(newVector);
@@ -83,7 +86,8 @@ function drawVector(newVector,origin = new THREE.Vector3(0,0,0)){
 		fog:true
     }));
 	addedByUser.add(line);
-
+	
+	callback();
 }
 
 

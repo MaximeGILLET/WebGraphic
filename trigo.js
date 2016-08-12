@@ -87,7 +87,8 @@ function drawThreeVector(newVector,origin = new THREE.Vector3(0,0,0),callback){
     }));
 	addedByUser.add(line);
 	
-	callback();
+	if(callback)
+		callback();
 }
 
 
@@ -117,7 +118,6 @@ function init(){
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
     camera.position.set(10, 10,10);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
-
 	
 	/* Setting base vectors */
 	var materialX = new THREE.LineBasicMaterial({

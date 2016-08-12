@@ -92,4 +92,60 @@ function stepWrap(){
 	liebnizRank ++;
 
 }
+var deg_to_rad = Math.PI / 180.0;
+var depth3D = 10;
 
+function initTreeVector(){
+
+	drawTreeVector(new THREE.Vector3(0,1,0), 90,90, depth3D);
+	render();
+}
+function drawTreeVector(vector,teta,phi,depth3D){	
+	if (depth3D !== 0){
+		var newVector = new THREE.Vector3(0,1,0);
+		
+		newVector.x = vector.x+(vector.length()*depth3D/10)*Math.cos(teta * deg_to_rad)*Math.cos(phi * deg_to_rad);
+		newVector.z = vector.z+(vector.length()*depth3D/10)*Math.sin(teta * deg_to_rad)*Math.cos(phi * deg_to_rad);
+		newVector.y = vector.y+(vector.length()*depth3D/10)*Math.sin(phi * deg_to_rad);
+		
+		drawThreeVector(newVector, vector);
+		drawTreeVector(newVector, teta +20,phi-20, depth3D - 1);
+		drawTreeVector(newVector, teta +180,phi-20, depth3D - 1);
+
+	}
+	
+
+}
+
+
+
+function initTree(){
+
+	drawTree(0, 0, 90, depth);
+}
+var depth = 9;
+function drawTree(x1, y1, angle, depth){
+  if (depth !== 0){
+    var x2 = x1 + (Math.cos(angle * deg_to_rad));
+    var y2 = y1 + (Math.sin(angle * deg_to_rad));
+    drawLine(x1, y1, x2, y2, depth);
+    drawTree(x2, y2, angle - 20, depth - 1);
+    drawTree(x2, y2, angle + 20, depth - 1);
+  }
+}
+
+function drawLine(x1,y1,x2,y2){
+
+	var geometry = new THREE.Geometry();	
+    geometry.vertices.push(new THREE.Vector3(x1, y1, 0));
+    geometry.vertices.push(new THREE.Vector3(x2,y2,0));
+ 
+    var line = new THREE.Line(geometry, new THREE.LineBasicMaterial({
+        color: 0xffff00,
+		fog:true
+    }));
+	
+	addedByUser.add(line);
+
+
+}

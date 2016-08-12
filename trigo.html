@@ -12,28 +12,28 @@
 </head>
 
 <body>
-	<div id="container">
+	<div id="containe">
 
 	</div>
 	<div class="GUI">
-		<form id="EditorForm" class="col-md-3" >
+		<form id="EditorForm" class="col-md-1" >
 		   <span class="label label-default" >Vector 1 :</span>
-		   <div class="input-group col-md-3">				
+		   <div class="input-group">				
 				<span class="input-group-addon" id="basic-addon1">X:</span>
 				<input class="form-control" id="x1" type="number" min="-100" max="100" step="1" name="vector1"/>
 			</div>
-			 <div class="input-group col-md-3">				
+			 <div class="input-group">				
 				<span class="input-group-addon" id="basic-addon1">Y:</span>
 				<input class="form-control" id="y1" type="number" min="-100" max="100" step="1" name="vector1"/>
 			</div>
-			 <div class="input-group col-md-3">				
+			 <div class="input-group">				
 				<span class="input-group-addon" id="basic-addon1">Z:</span>
 				<input class="form-control" id="z1" type="number" min="-100" max="100" step="1" name="vector1"/>
 			</div>
-			<div class="btn btn-default" onClick="updateVectors()">Draw!</div>
-			<div class="btn btn-default" onClick="cleanVectors()">Clear.</div>
+			<div class="btn btn-default" onClick="updateVectors()" style="width : 100%;">Draw!</div>
+			<div class="btn btn-default" onClick="cleanVectors()" style="width : 100%;">Clear.</div>
 		</form>
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<span class="label label-default" >Camera control :</span>
 			<div class="btn btn-default" onClick="resetCamera()">Reset</div>
 			<div class="btn btn-default" onClick="faceX()">X</div>
@@ -63,6 +63,7 @@ body {overflow: hidden; }
 	background-color:rgba(0, 0, 0, 0);
 	
 }
+
 
 #container{
 z-index = -1;

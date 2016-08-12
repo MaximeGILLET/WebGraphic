@@ -1,4 +1,4 @@
-var camera, controls, scene, renderer;
+var camera, controls, sceneAxes,sceneGrid, renderer;
 var addedByUser;
 var vector1,vector2;
 
@@ -10,28 +10,28 @@ $( document ).ready(function() {
 });
 
 function resetCamera(){
-	camera.position.set(20, 20,20);
+	camera.position.set(10, 10,10);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 	render();
 	
 }
 
 function faceX(){
-	camera.position.set(20, 0,0);
+	camera.position.set(10, 0,0);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 	render();
 	
 }
 
 function faceY(){
-	camera.position.set(0, 20,0);
+	camera.position.set(0, 10,0);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 	render();
 	
 }
 
 function faceZ(){
-	camera.position.set(0, 0,20);
+	camera.position.set(0, 0,10);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 	render();
 	
@@ -42,7 +42,7 @@ function updateVectors(){
 	var object = $("#EditorForm").serializeArray();
 	
 	var vectorArray = parseVectors(object);
-	vectorArray.forEach(updateVector);
+	vectorArray.forEach(drawVector);
 	render();
 }
 
@@ -59,7 +59,7 @@ function parseVectors(object){
 
 }
 
-function updateVector(element, index, array){
+function drawVector(element, index, array){
 	
 	var geometry = new THREE.Geometry();
     geometry.vertices.push(new THREE.Vector3(element.x, element.y, element.z));
@@ -72,11 +72,25 @@ function updateVector(element, index, array){
 	addedByUser.add(line);
 }
 
+function drawVector(newVector,origin = new THREE.Vector3(0,0,0)){
+	
+	var geometry = new THREE.Geometry();
+    geometry.vertices.push(newVector);
+    geometry.vertices.push(origin);
+ 
+    var line = new THREE.Line(geometry, new THREE.LineBasicMaterial({
+        color: 0xffffff,
+		fog:true
+    }));
+	addedByUser.add(line);
+
+}
+
 
 function cleanVectors(){
-	scene.remove(addedByUser);
+	sceneAxes.remove(addedByUser);
 	addedByUser= new THREE.Object3D();
-	scene.add(addedByUser);
+	sceneAxes.add(addedByUser);
 	render();
 }
 
@@ -97,7 +111,7 @@ function init(){
 
 	/* setting camera */
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
-    camera.position.set(20, 20,20);
+    camera.position.set(10, 10,10);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 	
@@ -129,10 +143,8 @@ function init(){
     var geometryZ = new THREE.Geometry();
     geometryZ.vertices.push(new THREE.Vector3(0, 0, 0));
     geometryZ.vertices.push(new THREE.Vector3(0,0, 1)); 
-    var lineZ = new THREE.Line(geometryZ, materialZ);     
+    var lineZ = new THREE.Line(geometryZ, materialZ);   
 	
-
-	  
 	/* Setting Grid object */
 	var size = 100;
 	var step = 1;

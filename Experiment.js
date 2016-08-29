@@ -123,6 +123,7 @@ function drawTreeVector(vector,teta,phi,depth3D){
 function initTree(){
 
 	drawTree(0, 0, 90, depth);
+	
 }
 var depth = 9;
 function drawTree(x1, y1, angle, depth){
@@ -133,6 +134,7 @@ function drawTree(x1, y1, angle, depth){
     drawTree(x2, y2, angle - 20, depth - 1);
     drawTree(x2, y2, angle + 20, depth - 1);
   }
+  render();
 }
 
 function drawLine(x1,y1,x2,y2){
